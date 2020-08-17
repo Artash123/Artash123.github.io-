@@ -1,17 +1,47 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+      <div class="table-wrapper">
+        <h2>Bids</h2>
+        <table>
+          <tr>
+            <th>Amount</th>
+            <th>Price</th>
+            <th>Total</th>
+          </tr>
+          <tr v-for="(bid,index) in getBook.bids" :key="index">
+            <td>{{bid.quantity}}</td>
+            <td>{{bid.price}}</td>
+            <td>{{(bid.price * bid.quantity).toFixed(6)}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="table-wrapper">
+        <h2>Asks</h2>
+        <table>
+          <tr>
+            <th>Amount</th>
+            <th>Price</th>
+            <th>Total</th>
+          </tr>
+          <tr v-for="(ask,index) in getBook.asks" :key="index">
+            <td>{{ask.quantity}}</td>
+            <td>{{ask.price}}</td>
+            <td>{{(ask.price * ask.quantity).toFixed(6)}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  computed: mapGetters(['getBook']),
+  async mounted() {
+    this.$store.dispatch('fetchBook');
   }
 }
 </script>
@@ -24,5 +54,17 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.table-wrapper {
+  text-align: center;
+  max-width: 500px;
 }
 </style>
