@@ -1,28 +1,20 @@
 <template>
   <div id="app">
+    <app-header />
     <div class="container">
-      <div class="table-wrapper">
-        <table-card :title="'Bids'" :imgSrc="'arrow.svg'" :items="getBook.bids" />
-      </div>
-      <div class="table-wrapper">
-        <table-card :title="'Asks'" :imgSrc="'arrow_down.svg'" :items="getBook.asks" />
-      </div>
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import TableCard from './components/TableCard';
+import AppHeader from './components/UIComponents/AppHeader';
+
 export default {
   name: 'App',
   components: {
-    TableCard,
+    AppHeader,
   },
-  computed: mapGetters(['getBook']),
-  async mounted() {
-    this.$store.dispatch('fetchBook');
-  }
 }
 </script>
 
@@ -33,19 +25,13 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
-}
-
-.table-wrapper {
-  text-align: center;
-  max-width: 500px;
 }
 </style>

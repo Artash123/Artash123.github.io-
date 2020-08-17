@@ -1,11 +1,11 @@
 <template>
   <div class="card card-with-img">
     <div class="card-top">
-      <div class="card-top-left">
+      <div class="card-top-left" :style="`background-color: ${headColor}`">
         <img class="card-top-left-img"  :src="require(`@/assets/images/${imgSrc}`)" alt="" />
       </div>
       <div class="card-top-right">
-        <h2 class="card-top-right-text">{{ title }}</h2>
+        <h3 class="card-top-right-text">{{ title }}</h3>
       </div>
     </div>
     <div class="card-content">
@@ -26,12 +26,12 @@
             </td>
             <td>
               <div class="table-content">
-                {{ parseFloat(item.price).toFixed(6) }}
+                {{ parseFloat(item.price).toFixed(2) }}
               </div>
             </td>
             <td>
               <div class="table-content">
-                {{ (item.price*item.quantity).toFixed(6) }}
+                {{ (item.price*item.quantity).toFixed(2) }}
               </div>
             </td>
           </tr>
@@ -45,6 +45,10 @@
 export default {
   props: {
     title: {
+      type: String,
+      required: true,
+    },
+    headColor: {
       type: String,
       required: true,
     },
