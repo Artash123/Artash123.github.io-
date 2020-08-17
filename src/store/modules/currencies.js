@@ -15,7 +15,7 @@ export default {
     }
   },
   state: {
-    book: []
+    items: []
   },
   getters: {
     getBook(state) {

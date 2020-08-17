@@ -2,34 +2,10 @@
   <div id="app">
     <div class="container">
       <div class="table-wrapper">
-        <h2>Bids</h2>
-        <table>
-          <tr>
-            <th>Amount</th>
-            <th>Price</th>
-            <th>Total</th>
-          </tr>
-          <tr v-for="(bid,index) in getBook.bids" :key="index">
-            <td>{{bid.quantity}}</td>
-            <td>{{bid.price}}</td>
-            <td>{{(bid.price * bid.quantity).toFixed(6)}}</td>
-          </tr>
-        </table>
+        <table-card :title="'Bids'" :imgSrc="'arrow.svg'" :items="getBook.bids" />
       </div>
       <div class="table-wrapper">
-        <h2>Asks</h2>
-        <table>
-          <tr>
-            <th>Amount</th>
-            <th>Price</th>
-            <th>Total</th>
-          </tr>
-          <tr v-for="(ask,index) in getBook.asks" :key="index">
-            <td>{{ask.quantity}}</td>
-            <td>{{ask.price}}</td>
-            <td>{{(ask.price * ask.quantity).toFixed(6)}}</td>
-          </tr>
-        </table>
+        <table-card :title="'Asks'" :imgSrc="'arrow_down.svg'" :items="getBook.asks" />
       </div>
     </div>
   </div>
@@ -37,8 +13,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import TableCard from './components/TableCard';
 export default {
   name: 'App',
+  components: {
+    TableCard,
+  },
   computed: mapGetters(['getBook']),
   async mounted() {
     this.$store.dispatch('fetchBook');
@@ -46,7 +26,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import './assets/scss/main';
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

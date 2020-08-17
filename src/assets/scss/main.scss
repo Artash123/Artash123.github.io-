@@ -1,0 +1,133 @@
+$dark-blue-grey-two: #171335;
+$golden: #f9bc00;
+$dark: #130f2b;
+$dark-navy-blue: #010011;
+$bluey-grey: #a8a6bc;
+$dark-two: #120E2A;
+$bluey-grey-two: #201C47;
+* {
+  box-sizing: border-box;
+}
+.card-with-img {
+  background-color: $dark-blue-grey-two;
+  border-radius: 10px;
+  width: 100%;
+  .card-top {
+    display: flex;
+    border-radius: 10px 10px 0 0;
+    &-left {
+      padding: 20px;
+      background-color: $golden;
+      border-radius: 10px 0 0 0;
+      &-img {
+        max-height: 40px;
+      }
+    }
+    &-right {
+      color: $bluey-grey;
+      padding-left: 20px;
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      &-text {
+        margin: 0;
+      }
+    }
+  }
+  .card-content {
+    padding: 12px;
+  }
+}
+.table-dark {
+  background-color: transparent;
+  border-collapse: separate;
+  border-spacing: 0 4px;
+  thead:after {
+    content: "@";
+    display: block;
+    line-height: 0;
+    text-indent: -99999px;
+  }
+  tbody {
+    padding-right: 10px;
+    height: 370px;
+    overflow-y: scroll;
+    display: block;
+  }
+  thead {
+    th {
+      white-space: nowrap;
+      background-color: $dark-navy-blue;
+      color: $bluey-grey;
+      font-weight: normal;
+    }
+  }
+  td {
+    overflow: hidden;
+    background-color: $dark-two;
+    font-size: 18px;
+    text-align: left;
+    vertical-align: middle;
+  }
+  td,
+  thead th {
+    padding: 0;
+    border-color: $bluey-grey-two;
+    border-width: 1px 0 1px 0;
+    border-style: solid;
+  }
+  td:first-child,
+  th:first-child {
+    border-left-style: solid;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-width: 1px 0 1px 1px;
+  }
+  td:last-child,
+  th:last-child {
+    border-right-style: solid;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-width: 1px 1px 1px 0;
+    .table-content {
+      border: none;
+    }
+  }
+  th:last-child {
+    width: 36%;
+  }
+  .table-content {
+    border-right: 1px solid $bluey-grey-two;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    margin: 8px 0;
+    color: $bluey-grey;
+  }
+
+  thead,
+  tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: $dark-navy-blue;
+    border: 1px solid $bluey-grey-two;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #a8a6bc;
+    border: 2px solid rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    background-clip: padding-box;
+  }
+
+}
