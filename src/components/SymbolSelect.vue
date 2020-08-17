@@ -3,7 +3,7 @@
     <div class="bsc-dropdown-trigger ant-dropdown-trigger"
       @click="selectOpened = !selectOpened">
       <span class="d-flex align-items-center">
-        BTCUSD
+        {{ getSelected }}
       </span>
       <div v-if="!selectOpened" class="down">▼</div>
       <div v-else class="up">▲</div>
@@ -27,46 +27,30 @@ export default {
       selectOpened: false,
     };
   },
-  computed: mapGetters(['getTickers']),
+  computed: mapGetters(['getTickers','getSelected']),
   async mounted() {
     this.$store.dispatch('fetchTickers');
   },
   methods: {
     setSymbol(symbol) {
       this.selectOpened = false;
-      this.$eventBus.$emit('changeSymbol', symbol)
+      this.$store.dispatch('addDiff',this.getSelected + ' -> ' + symbol);
+      this.$store.dispatch('setSelected',symbol);
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-$primary: #010117;
-$dark-blue-grey: #221c49;
-$dark-blue-grey-two: #171335;
-$dark-navy-blue: #010011;
-$dark-navy-blue-two: #01000c;
-$darkish-purple: #6f2284;
-$electric-green: #30f902;
-$darkish-purple: #6f2284;
-$bluey-grey: #a8a6bc;
-$bluey-grey-two: #201C47;
-$cyan: #00ffff;
-$dark: #130f2b;
-$dark-two: #120E2A;
-$green: #00ddc2;
-$light-green: #3afd06;
-$golden: #f9bc00;
-$neon-pink: #db0396;
-$white: #ffffff;
+ @import '../assets/scss/_variables.scss';
 
 .dark-custom-select {
   position: relative;
   z-index: 100;
-  width: 200px;
+  width: 300px;
 
   .ant-dropdown-trigger.bsc-dropdown-trigger {
-    border: 1px solid $bluey-grey-two;
-    padding: 3px 10px;
+    border: 2px solid $bluey-grey-two;
+    padding: 10px 20px;
     border-radius: 5px;
     background-color: $dark-navy-blue;
     font-family: "Fira Sans", sans-serif;

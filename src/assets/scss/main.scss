@@ -1,10 +1,4 @@
-$dark-blue-grey-two: #171335;
-$golden: #f9bc00;
-$dark: #130f2b;
-$dark-navy-blue: #010011;
-$bluey-grey: #a8a6bc;
-$dark-two: #120E2A;
-$bluey-grey-two: #201C47;
+ @import './_variables.scss';
 * {
   box-sizing: border-box;
 }
@@ -12,6 +6,23 @@ body {
   background-color: #010011;
   padding: 0;
   margin: 0;
+}
+.page {
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: $dark-navy-blue;
+    border: 1px solid $bluey-grey-two;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #a8a6bc;
+    border: 2px solid rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    background-clip: padding-box;
+  }
 }
 .card-with-img {
   background-color: $dark-blue-grey-two;
@@ -21,11 +32,10 @@ body {
     display: flex;
     border-radius: 10px 10px 0 0;
     &-left {
-      padding: 20px;
-      background-color: $golden;
+      padding: 16px;
       border-radius: 10px 0 0 0;
       &-img {
-        max-height: 34px;
+        max-height: 30px;
       }
     }
     &-right {
@@ -41,6 +51,15 @@ body {
   }
   .card-content {
     padding: 12px;
+    &-empty {
+      width: 400px;
+      height: calc(100vh - 280px);
+      color: $bluey-grey;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
   }
 }
 .table-dark {
@@ -68,7 +87,7 @@ body {
       }
     }
     @media screen and (min-width: 1200px) {
-      height: calc(100vh - 300px);
+      height: calc(100vh - 280px);
     }
   }
   thead {

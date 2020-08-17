@@ -7,29 +7,38 @@ export default {
       const tickers = await client.allBookTickers()
       ctx.commit('SET_TICKERS',tickers)
     },
-    async fetchBook(ctx,symbol = 'BTCUSDT'){
-      const book = await client.book({ symbol: symbol });
-      ctx.commit('SET_BOOK',book)
+    setSelected(ctx,selected){
+      ctx.commit('SET_SELECTED',selected)
+    },
+    addDiff(ctx,diff){
+      ctx.commit('ADD_DIFF',diff)
     }
   },
   mutations: {
     SET_TICKERS(state,tickers){
       state.tickers = tickers;
     },
-    SET_BOOK(state,book){
-      state.book = book;
+    SET_SELECTED(state,selected){
+      state.selected = selected;
+    },
+    ADD_DIFF(state,diff){
+      state.diffs.push(diff);
     }
   },
   state: {
     tickers: [],
-    book: []
+    selected: 'BTCUSDT',
+    diffs: []
   },
   getters: {
     getTickers(state) {
       return state.tickers;
     },
-    getBook(state) {
-      return state.book;
+    getSelected(state) {
+      return state.selected;
+    },
+    getDiffs(state) {
+      return state.diffs;
     }
   },
 }

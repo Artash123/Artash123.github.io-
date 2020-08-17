@@ -1,74 +1,49 @@
 <template>
   <div class="page">
-    <div class="page-top">
-      <symbol-select />
-    </div>
     <div class="page-main">
-      <div class="page-main-table-wrapper">
-        <table-card :title="'Bids'" :imgSrc="'arrow.svg'" :items="getBook.bids" :headColor="'#00ddc2'" />
-      </div>
-      <div class="page-main-table-wrapper">
-        <table-card :title="'Asks'" :imgSrc="'arrow_down.svg'" :items="getBook.asks" :headColor="'#DC3545'"/>
+      <symbol-select />
+      <div class="diff-info-wrapper">
+        <div class="diff-info-wrapper-row" v-for="(diff,index) in getDiffs" :key="index">
+          {{ diff }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import TableCard from './TableCard';
 import SymbolSelect from './SymbolSelect';
-
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      lastSymbol: 'BTCUSD',
+    };
+  },
   components: {
     SymbolSelect,
-    TableCard,
   },
-  computed: mapGetters(['getBook']),
-  async mounted() {
-    this.$store.dispatch('fetchBook');
-  },
-  created () {
-    this.$eventBus.$on('changeSymbol', data => {
-      this.$store.dispatch('fetchBook',data);
-    })
-  }
+  computed: mapGetters(['getDiffs']),
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
  @import '../assets/scss/_variables.scss';
 .page {
   width: 100%;
-  padding-top: 20px;
-  &-top {
-    display: flex;
-    justify-content: center;
-  }
+  padding-top: 60px;
   &-main {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    &-table-wrapper {
-        max-width: 400px;
-        margin: 16px 30px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .diff-info-wrapper {
+    color: #a8a6bc;
+    margin-top: 20px;
+    &-row {
+      padding: 6px;
     }
-  }
-  /* Scrollbar */
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: $dark-navy-blue;
-    border: 1px solid $bluey-grey-two;
-    border-radius: 4px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #a8a6bc;
-    border: 2px solid rgba(0, 0, 0, 0);
-    border-radius: 4px;
-    background-clip: padding-box;
   }
 }
 </style>

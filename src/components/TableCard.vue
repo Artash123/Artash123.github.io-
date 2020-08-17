@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="card-content">
-      <table class="table-dark">
+      <table v-if="items.length" class="table-dark">
         <thead>
           <tr>
             <th scope="col"><div class="table-content">Amount</div></th>
@@ -26,17 +26,20 @@
             </td>
             <td>
               <div class="table-content">
-                {{ parseFloat(item.price).toFixed(2) }}
+                {{ parseFloat(item.price).toFixed(6) }}
               </div>
             </td>
             <td>
               <div class="table-content">
-                {{ (item.price*item.quantity).toFixed(2) }}
+                {{ (item.price*item.quantity).toFixed(6) }}
               </div>
             </td>
           </tr>
         </tbody>
       </table>
+      <div v-else class="card-content-empty">
+        <h3>No data for this ticker</h3>
+      </div>
     </div>
   </div>
 </template>
